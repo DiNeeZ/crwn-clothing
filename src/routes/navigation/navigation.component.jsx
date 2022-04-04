@@ -20,13 +20,8 @@ const Navigation = () => {
               </Link>
             </li>
             <li className='nav-item'>
-              <Link className='nav-link' to='/shop'>
-                Shop
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link className='nav-link' to='/shop'>
-                Shop
+              <Link className='nav-link' to='/sign-in'>
+                Sign In
               </Link>
             </li>
           </ul>
