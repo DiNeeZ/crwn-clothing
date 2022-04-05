@@ -1,3 +1,4 @@
+import { ReactComponent as GoogleIcon } from '../../assets/google-icon.svg'
 import './button.styles.scss'
 
 const BUTTON_TYPE_CLASSES = {
@@ -11,6 +12,7 @@ const Button = ({ children, buttonType, ...otherProps }) => {
       className={`button-container ${BUTTON_TYPE_CLASSES[buttonType]}`}
       {...otherProps}
     >
+      { buttonType === 'google' && <GoogleIcon className='google-icon' /> }
       {children}
     </button>
   )

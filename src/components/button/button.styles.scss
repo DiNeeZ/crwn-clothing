@@ -1,4 +1,6 @@
 .button-container {
+  display: flex;
+  align-items: center;
   min-width: 165px;
   width: auto;
   height: 50px;
@@ -23,6 +25,7 @@
   }
 
   &.google-sign-in {
+    padding-left: 24px;
     background-color: #4285f4;
     color: white;
 
@@ -42,5 +45,12 @@
       color: white;
       border: none;
     }
+  }
+
+  .google-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    fill: white;
   }
 }

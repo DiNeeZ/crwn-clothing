@@ -88,9 +88,7 @@ const SignUpForm = () => {
           onChange={handleChange}
           required />
 
-        <Button type='text'>Kamen Krot</Button>
-        <Button buttonType='inverted' type='text'>Picato</Button>
-        <Button buttonType='google' type='text'>Nikutki</Button>
+        <Button type='submit'>SIGN UP</Button>
       </form>
     </div>
   )
