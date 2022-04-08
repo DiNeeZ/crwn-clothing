@@ -1,5 +1,11 @@
 import { createContext, useEffect, useState } from 'react'
 
+const removeItemFromCart = (cartItems, productToRemove) => {
+  const removedCartItem = cartItems.find(cartItem => cartItem.id === productToRemove.id)
+
+  return cartItems.filter(item => item.id !== removedCartItem.id)
+}
+
 const addCartItem = (cartItems, productToAdd) => {
   const existingCartItem = cartItems.find(cartItem => cartItem.id === productToAdd.id)
 
@@ -13,6 +19,19 @@ const addCartItem = (cartItems, productToAdd) => {
   return [...cartItems, { ...productToAdd, quantity: 1 }]
 }
 
+const decreaseItemFromCart = (cartItems, product) => {
+  const productItem = cartItems.find(item => item.id === product.id)
+
+  if (productItem.quantity <= 1) {
+    return removeItemFromCart(cartItems, product)
+  } else {
+    return cartItems.map(item => item.id === product.id ?
+      { ...item, quantity: item.quantity - 1 } :
+      item
+    )
+  }
+}
+
 export const CartContext = createContext({
   isCartOpen: false,
   setIsCartOpen: () => { },
@@ -24,7 +43,7 @@ export const CartContext = createContext({
 export const CartProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [cartItems, setCartItems] = useState([])
-  const [ cartCount, setCartCount ] = useState(0)
+  const [cartCount, setCartCount] = useState(0)
 
   useEffect(() => {
     const newCartCount = cartItems.reduce((acc, curr) => acc + curr.quantity, 0)
@@ -35,7 +54,18 @@ export const CartProvider = ({ children }) => {
     setCartItems(addCartItem(cartItems, productToAdd))
   }
 
-  const value = { isCartOpen, setIsCartOpen, addItemToCart, cartItems, cartCount }
+  const removeItem = (productToRemove) => {
+    setCartItems(removeItemFromCart(cartItems, productToRemove))
+  }
+
+  const decreaseItem = (itemToDecrease) => {
+    setCartItems(decreaseItemFromCart(cartItems, itemToDecrease))
+  }
+
+  const value = {
+    isCartOpen, setIsCartOpen, addItemToCart, cartItems,
+    cartCount, removeItem, decreaseItem
+  }
 
   return (
     <CartContext.Provider value={value}>
