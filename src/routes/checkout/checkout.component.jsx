@@ -7,8 +7,8 @@ import { ReactComponent as CloseButton } from '../../assets/close-button.svg'
 
 import './checkout.styles.scss'
 
-const CheckoutItem = ({ cartProduct, handlers }) => {
-  const { addItemToCart, removeItem, decreaseItem } = handlers
+const CheckoutItem = ({ cartProduct }) => {
+  const { addItemToCart, removeItem, decreaseItem } = useContext(CartContext)
   const { id, imageUrl, name, price, quantity } = cartProduct
 
   const increaseProductQuantity = () => {
@@ -58,10 +58,7 @@ const CheckoutItem = ({ cartProduct, handlers }) => {
 }
 
 const Checkout = () => {
-  const { cartItems, addItemToCart, removeItem, decreaseItem }
-    = useContext(CartContext)
-    
-  const handlers = { addItemToCart, removeItem, decreaseItem }
+  const { cartItems, cartTotal } = useContext(CartContext)
 
   return (
     <div className='checkout-container'>
@@ -81,11 +78,12 @@ const Checkout = () => {
               <CheckoutItem
                 key={cartItem.id}
                 cartProduct={cartItem}
-                handlers={handlers} />
+              />
             ))
           }
         </tbody>
       </table>
+      <div className='total'>Total: {cartTotal}$</div>
     </div>
   )
 }

@@ -48,4 +48,32 @@
       width: 10%;
     }
   }
+
+  .product-count-container {
+    position: absolute;
+    top: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+   .product-count {
+    transform: scale(0);
+    font-size: 140px;
+    font-weight: 700;
+    opacity: .7;
+    color: #fff;
+    text-shadow: 0px 2px 6px black;
+    animation: increase-text .3s linear;
+   }
+}
+
+@keyframes increase-text {
+  from {
+    transform: scale(1);
+    opacity: 0;
+  }
+  to {
+    transform: scale(0);
+    opacity: .7;
+  }
 }
