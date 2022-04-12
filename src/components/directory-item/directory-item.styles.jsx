@@ -26,7 +26,7 @@ export const Body = styled.div`
   position: absolute;
 `
 
-export const DirectoryItemContainer = styled(Link)`
+export const DirectoryItemContainer = styled.div`
   min-width: 30%;
   height: 240px;
   flex: 1 1 auto;
