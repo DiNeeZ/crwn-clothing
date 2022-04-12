@@ -5,7 +5,13 @@ import { ReactComponent as ArrowLeft } from '../../assets/arrow-left.svg'
 import { ReactComponent as ArrowRight } from '../../assets/arrow-right.svg'
 import { ReactComponent as CloseButton } from '../../assets/close-button.svg'
 
-import './checkout.styles.scss'
+import {
+  CheckoutContainer,
+  CheckoutTable,
+  Total,
+  ImageContainer,
+  Quantity
+} from './checkout.styles'
 
 const CheckoutItem = ({ cartProduct }) => {
   const { addItemToCart, removeItem, decreaseItem } = useContext(CartContext)
@@ -25,31 +31,24 @@ const CheckoutItem = ({ cartProduct }) => {
 
   return (
     <tr key={id}>
-      <td className='image-container'>
+      <ImageContainer>
         <img src={imageUrl} alt={name} />
-      </td>
+      </ImageContainer>
       <td>{name}</td>
       <td>
-        <div className='quantity'>
-          <button
-            className='btn-arrow'
-            onClick={decreaseProduct}>
+        <Quantity>
+          <button onClick={decreaseProduct}>
             <ArrowLeft />
           </button>
           <span>{quantity}</span>
-          <button
-            className='btn-arrow'
-            onClick={increaseProductQuantity}
-          >
+          <button onClick={increaseProductQuantity}>
             <ArrowRight />
           </button>
-        </div>
+        </Quantity>
       </td>
       <td>{price}</td>
       <td>
-        <button
-          className='btn-close'
-          onClick={deleteProduct}>
+        <button onClick={deleteProduct}>
           <CloseButton />
         </button>
       </td>
@@ -61,8 +60,8 @@ const Checkout = () => {
   const { cartItems, cartTotal } = useContext(CartContext)
 
   return (
-    <div className='checkout-container'>
-      <table className='checkout-table'>
+    <CheckoutContainer>
+      <CheckoutTable>
         <thead>
           <tr>
             <th>Product</th>
@@ -72,7 +71,7 @@ const Checkout = () => {
             <th>Remove</th>
           </tr>
         </thead>
-        <tbody className='checkout-table-body'>
+        <tbody>
           {
             cartItems.map(cartItem => (
               <CheckoutItem
@@ -82,9 +81,9 @@ const Checkout = () => {
             ))
           }
         </tbody>
-      </table>
-      <div className='total'>Total: {cartTotal}$</div>
-    </div>
+      </CheckoutTable>
+      <Total>Total: {cartTotal}$</Total>
+    </CheckoutContainer>
   )
 }
 

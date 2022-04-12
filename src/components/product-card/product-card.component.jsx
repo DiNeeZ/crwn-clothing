@@ -1,8 +1,14 @@
 import { useContext, useEffect, useState } from 'react'
 
-import Button from '../button/button.component'
+import Button, {BUTTON_TYPE_CLASSES} from '../button/button.component'
 import { CartContext } from '../../contexts/cart.context'
-import './product-card.styles.scss'
+
+import {
+  ProductCardContainer,
+  ProductCountContainer,
+  ProductCount,
+  CardFooter
+} from './product-card.styles.jsx'
 
 const ProductCard = ({ product }) => {
   const { name, imageUrl, price, id } = product
@@ -30,25 +36,25 @@ const ProductCard = ({ product }) => {
   }
 
   return (
-    <div className='product-card-container'>
+    <ProductCardContainer>
       <img src={imageUrl} alt={name} />
-      <div className='footer'>
-        <span className='name'>{name}</span>
-        <span className='price'>{price}</span>
-      </div>
+      <CardFooter>
+        <span>{name}</span>
+        <span>{price}</span>
+      </CardFooter>
       <Button
-        buttonType='inverted'
+        buttonType={BUTTON_TYPE_CLASSES.inverted}
         onClick={addProductToCart}>
         Add to cart
       </Button>
       {isQuantityVisible && (
-        <div className='product-count-container'>
-          <div className='product-count'>
+        <ProductCountContainer>
+          <ProductCount>
             X <span>{productQuantity}</span>
-          </div>
-        </div>
+          </ProductCount>
+        </ProductCountContainer>
       )}
-    </div>
+    </ProductCardContainer>
   )
 }
 

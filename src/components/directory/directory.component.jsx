@@ -1,9 +1,9 @@
 import DirectoryItem from '../directory-item/directory-item.component'
-import './directory.styles.scss'
+import { DirectoryContainer } from './directory.styles.jsx'
 
 const Directory = ({ categories }) => {
   return (
-    <div className='directory-container'>
+    <DirectoryContainer>
       {
         categories.map((category, idx) => {
           const prevLastIndex = categories.length - 2
@@ -14,7 +14,7 @@ const Directory = ({ categories }) => {
           )
         })
       }
-    </div>
+    </DirectoryContainer>
   )
 }
 

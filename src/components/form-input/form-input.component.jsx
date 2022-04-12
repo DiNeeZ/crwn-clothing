@@ -1,16 +1,18 @@
-import './form-inut.styles.scss'
+import {
+  FormInputLabel,
+  Group,
+  Input,
+
+} from './form-inut.styles'
 
 const FormInput = ({ label, ...otherProps }) => {
-  const isValue = otherProps.value.length
   return (
-    <div className='group'>
-      <input className='form-input' {...otherProps} />
-      {label && (
-        <label className={`${isValue ? 'shrink' : ''} form-input-label`}>
-          {label}
-        </label>
-      )}
-    </div>
+    <Group>
+      <Input className='form-input' {...otherProps} />
+      <FormInputLabel shrink={otherProps.value.length} >
+        {label}
+      </FormInputLabel>
+    </Group>
   )
 }
 

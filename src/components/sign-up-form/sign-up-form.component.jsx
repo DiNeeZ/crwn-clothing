@@ -8,7 +8,7 @@ import {
 } from '../../utils/firebase/firebase.utils'
 
 
-import './sign-up-form.styles.scss'
+import { SignUpContainer } from './sign-up-form.styles'
 
 const defaultFormFields = {
   displayName: '',
@@ -56,7 +56,7 @@ const SignUpForm = () => {
   }
 
   return (
-    <div className='sign-up-container'>
+    <SignUpContainer>
       <h2>Don't have an account?</h2>
       <span>Sign up with your emai and password</span>
 
@@ -95,7 +95,7 @@ const SignUpForm = () => {
 
         <Button type='submit'>SIGN UP</Button>
       </form>
-    </div>
+    </SignUpContainer>
   )
 }
 
