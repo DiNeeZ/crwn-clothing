@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import Button, {BUTTON_TYPE_CLASSES} from '../button/button.component'
-import { CartContext } from '../../contexts/cart.context'
 
 import {
   ProductCardContainer,
@@ -9,13 +9,16 @@ import {
   ProductCount,
   CardFooter
 } from './product-card.styles.jsx'
+import { selectCartItems } from '../../store/cart/cart.selector'
+import { addItemToCart } from '../../store/cart/cart.action'
 
 const ProductCard = ({ product }) => {
   const { name, imageUrl, price, id } = product
 
+  const dispatch = useDispatch()
   const [productQuantity, setProductQuantity] = useState(0)
   const [showElement, setShowElement] = useState(false)
-  const { addItemToCart, cartItems } = useContext(CartContext)
+  const cartItems = useSelector(selectCartItems)
 
   useEffect(() => {
     const sameProductInCart = cartItems.find(cartItem => cartItem.id === id)
@@ -28,7 +31,7 @@ const ProductCard = ({ product }) => {
   const isQuantityVisible = productQuantity > 0 && showElement
 
   const addProductToCart = () => {
-    addItemToCart(product)
+    dispatch(addItemToCart(cartItems, product))
     setShowElement(true)
     setTimeout(() => {
       setShowElement(false)

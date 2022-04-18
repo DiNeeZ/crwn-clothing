@@ -1,13 +1,11 @@
 import React from 'react'
-import App from './App'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router-dom'
+import { Provider } from 'react-redux'
 import reportWebVitals from './reportWebVitals'
 
-import { UserProvider } from './contexts/user.context'
-import { CategoriesProvider } from './contexts/categories.context'
-import { CartProvider } from './contexts/cart.context'
-
+import { store } from './store/store'
+import App from './App'
 import './index.scss'
 
 
@@ -15,15 +13,11 @@ const root = createRoot(document.getElementById('root'))
 
 root.render(
   <React.StrictMode>
-    <Router>
-      <UserProvider>
-        <CategoriesProvider>
-          <CartProvider>
-            <App />
-          </CartProvider>
-        </CategoriesProvider>
-      </UserProvider>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
   </React.StrictMode>
 )
 
